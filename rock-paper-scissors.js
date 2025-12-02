@@ -25,7 +25,7 @@ function getHumanChoice() {
         if (humanChoice === 'rock' || humanChoice === 'paper' || humanChoice === 'scissors') {
             return humanChoice;
         }
-        humanChoice = prompt('Invalid Input! Please enter your choice from rock / paper / scissors');
+        humanChoice = prompt('Invalid Input! Please enter your choice from rock / paper / scissors').toLowerCase();
 
         if (humanChoice === null) { // user pressed cancel button
             return null;
