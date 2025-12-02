@@ -10,3 +10,10 @@ function getComputerChoice() {
             return 'scissors';
     }
 }
+
+function getHumanChoice() {
+    let humanChoice = prompt('Enter your choice from rock / paper / scissors').toLowerCase();
+    
+    // task says assume the user will always enter a valid choice so just return the humanChoice
+    return humanChoice;
+}
