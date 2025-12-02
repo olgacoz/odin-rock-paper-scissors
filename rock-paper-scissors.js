@@ -1,6 +1,11 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3); // Pick a random integer value between [0, 2]
     
@@ -19,4 +24,28 @@ function getHumanChoice() {
     
     // task says assume the user will always enter a valid choice so just return the humanChoice
     return humanChoice;
+}
+
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === 'rock' && computerChoice === 'scissors') {
+        console.log('You win! Rock beats Scissors');
+        humanScore += 1;
+    } else if (humanChoice === 'rock' && computerChoice === 'paper') {
+        console.log('You lose! Paper beats Rock');
+        computerScore += 1;
+    } else if (humanChoice === 'paper' && computerChoice === 'rock') {
+        console.log('You win! Paper beats Rock');
+        humanScore += 1;
+    } else if (humanChoice === 'paper' && computerChoice === 'scissors') {
+        console.log('You lose! Scissors beats Paper');
+        computerScore += 1;
+    } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+        console.log('You win! Scissors beats Paper');
+        humanScore += 1;
+    } else if (humanChoice === 'scissors' && computerChoice === 'rock') {
+        console.log('You lose! Rock beats Scissors');
+        computerScore += 1;
+    } else { // they both pick the same action. No points for both
+        console.log(`Draw! You both choose ${humanChoice}`);
+    }
 }
