@@ -65,22 +65,18 @@ function playGame() {
     }
     
     function playRound(humanChoice, computerChoice) {
-        if (humanChoice === 'rock' && computerChoice === 'scissors' ||
-            humanChoice === 'paper' && computerChoice === 'rock' ||
-            humanChoice === 'scissors' && computerChoice === 'paper'
+        if (humanChoice === computerChoice) {
+            console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`); // no points for both
+        } else if (
+            (humanChoice === 'rock' && computerChoice === 'scissors') ||
+            (humanChoice === 'paper' && computerChoice === 'rock') ||
+            (humanChoice === 'scissors' && computerChoice === 'paper')
         ) {
             console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
             humanScore += 1;
-        }
-        else if (humanChoice === 'rock' && computerChoice === 'paper' || 
-                humanChoice === 'paper' && computerChoice === 'scissors' ||
-                humanChoice === 'scissors' && computerChoice === 'rock'
-        ) {
+        } else {
             console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
             computerScore += 1;
-        }
-        else { // they both pick the same action. No points for both
-            console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`);
         }
     }
 }
