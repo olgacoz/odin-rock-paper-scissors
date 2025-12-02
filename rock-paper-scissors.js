@@ -14,10 +14,23 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt('Enter your choice from rock / paper / scissors').toLowerCase();
-    
-    // task says assume the user will always enter a valid choice so just return the humanChoice
-    return humanChoice;
+    let humanChoice = prompt('Enter your choice from rock / paper / scissors');
+
+    if (humanChoice === null) { // user pressed cancel button
+        return null;
+    }
+    humanChoice = humanChoice.toLowerCase();
+
+    while(true) {
+        if (humanChoice === 'rock' || humanChoice === 'paper' || humanChoice === 'scissors') {
+            return humanChoice;
+        }
+        humanChoice = prompt('Invalid Input! Please enter your choice from rock / paper / scissors');
+
+        if (humanChoice === null) { // user pressed cancel button
+            return null;
+        }
+    }
 }
 
 function playGame() {
@@ -26,6 +39,12 @@ function playGame() {
 
     for (let i = 0; i < 5; i++) {
         const humanSelection = getHumanChoice();
+
+        if (humanSelection === null) {
+            console.log('Game terminated by user.');
+            return; // exit game early
+        }
+
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
     }
