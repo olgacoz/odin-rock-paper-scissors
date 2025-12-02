@@ -33,6 +33,11 @@ function getHumanChoice() {
     }
 }
 
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.substring(1);
+}
+
+
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
@@ -60,26 +65,22 @@ function playGame() {
     }
     
     function playRound(humanChoice, computerChoice) {
-        if (humanChoice === 'rock' && computerChoice === 'scissors') {
-            console.log('You win! Rock beats Scissors');
+        if (humanChoice === 'rock' && computerChoice === 'scissors' ||
+            humanChoice === 'paper' && computerChoice === 'rock' ||
+            humanChoice === 'scissors' && computerChoice === 'paper'
+        ) {
+            console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
             humanScore += 1;
-        } else if (humanChoice === 'rock' && computerChoice === 'paper') {
-            console.log('You lose! Paper beats Rock');
+        }
+        else if (humanChoice === 'rock' && computerChoice === 'paper' || 
+                humanChoice === 'paper' && computerChoice === 'scissors' ||
+                humanChoice === 'scissors' && computerChoice === 'rock'
+        ) {
+            console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
             computerScore += 1;
-        } else if (humanChoice === 'paper' && computerChoice === 'rock') {
-            console.log('You win! Paper beats Rock');
-            humanScore += 1;
-        } else if (humanChoice === 'paper' && computerChoice === 'scissors') {
-            console.log('You lose! Scissors beats Paper');
-            computerScore += 1;
-        } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
-            console.log('You win! Scissors beats Paper');
-            humanScore += 1;
-        } else if (humanChoice === 'scissors' && computerChoice === 'rock') {
-            console.log('You lose! Rock beats Scissors');
-            computerScore += 1;
-        } else { // they both pick the same action. No points for both
-            console.log(`Draw! You both choose ${humanChoice}`);
+        }
+        else { // they both pick the same action. No points for both
+            console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`);
         }
     }
 }
