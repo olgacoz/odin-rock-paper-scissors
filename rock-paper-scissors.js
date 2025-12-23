@@ -1,9 +1,18 @@
 let humanScore = 0;
 let computerScore = 0;
+let noOfRoundsPlayed = 0;
 
-// const buttons = document.querySelectorAll('#rps button');
+const rpsButtons = document.querySelectorAll('#rps button');
+rpsButtons.forEach((rpsButton) => {
+  rpsButton.addEventListener('click', () => {
+    const computerChoice = getComputerChoice();
+    const humanChoice = rpsButton.id;
+    playRound(computerChoice, humanChoice);
+    noOfRoundsPlayed++;
+  });
+});
 
-playGame();
+// playGame();
 
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3); // Pick a random integer value between [0, 2]
@@ -43,16 +52,6 @@ function capitalizeFirstLetter(str) {
 }
 
 function playGame() {
-  const humanSelection = getHumanChoice();
-
-  if (humanSelection === null) {
-    console.log('Game terminated by user.');
-    return; // exit game early
-  }
-
-  const computerSelection = getComputerChoice();
-  playRound(humanSelection, computerSelection);
-
   console.log(`Human score: ${humanScore}   Computer score: ${computerScore}`);
 
   if (humanScore > computerScore) {
