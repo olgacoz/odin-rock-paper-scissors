@@ -1,19 +1,26 @@
 let humanScore = 0;
 let computerScore = 0;
-let noOfRoundsPlayed = 0;
 const rpsButtons = document.querySelectorAll('#rps button');
 const gameResults = document.querySelector('div#game-results');
+const playAgainButton = document.querySelector('#play-again');
 
 rpsButtons.forEach((rpsButton) => {
+  // When rps buttons clicked play one round against computer
   rpsButton.addEventListener('click', () => {
     const computerChoice = getComputerChoice();
     const humanChoice = rpsButton.id;
-    playRound(computerChoice, humanChoice);
-    noOfRoundsPlayed++;
+    playRound(humanChoice, computerChoice);
   });
 });
 
-// playGame();
+playAgainButton.addEventListener('click', () => {
+  rpsButtons.forEach((rpsButton) => {
+      toggleButton(rpsButton); // enable rps buttons
+  });
+  toggleButton(playAgainButton); // disable Play again button
+  // clear game-results div for a fresh run
+  gameResults.textContent = '';
+});
 
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3); // Pick a random integer value between [0, 2]
@@ -28,40 +35,8 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt('Enter your choice from rock / paper / scissors');
-
-  if (humanChoice === null) { // user pressed cancel button
-    return null;
-  }
-  humanChoice = humanChoice.toLowerCase();
-
-  while (true) {
-    if (humanChoice === 'rock' || humanChoice === 'paper' || humanChoice === 'scissors') {
-      return humanChoice;
-    }
-    humanChoice = prompt('Invalid Input! Please enter your choice from rock / paper / scissors').toLowerCase();
-
-    if (humanChoice === null) { // user pressed cancel button
-      return null;
-    }
-  }
-}
-
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.substring(1);
-}
-
-function playGame() {
-  console.log(`Human score: ${humanScore}   Computer score: ${computerScore}`);
-
-  if (humanScore > computerScore) {
-    console.log('Human wins!');
-  } else if (humanScore < computerScore) {
-    console.log('Computer wins!');
-  } else {
-    console.log('It\'s a draw!');
-  }
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -78,4 +53,35 @@ function playRound(humanChoice, computerChoice) {
     gameResults.innerHTML += `You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}` + '<br>';
     computerScore += 1;
   }
+
+  if (humanScore === 5 || computerScore === 5) {
+    displayRunningScore();
+    declareWinner();
+    rpsButtons.forEach((rpsButton) => {
+      toggleButton(rpsButton); // disable rps buttons
+    })
+    toggleButton(playAgainButton); // enable play again button
+
+    // reset humanScore, computerScore for a new run
+    humanScore = 0;
+    computerScore = 0;
+  }
+}
+
+function displayRunningScore() {
+  gameResults.innerHTML += '<br>' + `Human score: ${humanScore} &nbsp Computer score: ${computerScore}` + '<br>';
+}
+
+function declareWinner() {
+  if (humanScore > computerScore) {
+    gameResults.innerHTML += 'Human wins!';
+  } else if (humanScore < computerScore) {
+    gameResults.innerHTML += 'Computer wins!';
+  } else {
+    gameResults.innerHTML += 'It\'s a draw!';
+  }
+}
+
+function toggleButton(button) {
+  button.disabled = !button.disabled;
 }
