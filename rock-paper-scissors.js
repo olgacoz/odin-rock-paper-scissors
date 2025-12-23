@@ -42,17 +42,15 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
+    const humanSelection = getHumanChoice();
 
-        if (humanSelection === null) {
-            console.log('Game terminated by user.');
-            return; // exit game early
-        }
-
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+    if (humanSelection === null) {
+        console.log('Game terminated by user.');
+        return; // exit game early
     }
+
+    const computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
 
     console.log(`Human score: ${humanScore}   Computer score: ${computerScore}`);
 
