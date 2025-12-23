@@ -1,8 +1,9 @@
 let humanScore = 0;
 let computerScore = 0;
 let noOfRoundsPlayed = 0;
-
 const rpsButtons = document.querySelectorAll('#rps button');
+const gameResults = document.querySelector('div#game-results');
+
 rpsButtons.forEach((rpsButton) => {
   rpsButton.addEventListener('click', () => {
     const computerChoice = getComputerChoice();
@@ -65,16 +66,16 @@ function playGame() {
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`); // no points for both
+    gameResults.innerHTML += `Draw! You both choose ${capitalizeFirstLetter(humanChoice)}` + '<br>'; // no points for both
   } else if (
     (humanChoice === 'rock' && computerChoice === 'scissors') ||
     (humanChoice === 'paper' && computerChoice === 'rock') ||
     (humanChoice === 'scissors' && computerChoice === 'paper')
   ) {
-    console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
+    gameResults.innerHTML += `You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}` + '<br>';
     humanScore += 1;
   } else {
-    console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
+    gameResults.innerHTML += `You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}` + '<br>';
     computerScore += 1;
   }
 }
