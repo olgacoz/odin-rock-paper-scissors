@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 // const buttons = document.querySelectorAll('#rps button');
 
 playGame();
@@ -39,11 +42,7 @@ function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.substring(1);
 }
 
-
 function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
   const humanSelection = getHumanChoice();
 
   if (humanSelection === null) {
@@ -63,20 +62,20 @@ function playGame() {
   } else {
     console.log('It\'s a draw!');
   }
+}
 
-  function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-      console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`); // no points for both
-    } else if (
-      (humanChoice === 'rock' && computerChoice === 'scissors') ||
-      (humanChoice === 'paper' && computerChoice === 'rock') ||
-      (humanChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-      console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
-      humanScore += 1;
-    } else {
-      console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
-      computerScore += 1;
-    }
+function playRound(humanChoice, computerChoice) {
+  if (humanChoice === computerChoice) {
+    console.log(`Draw! You both choose ${capitalizeFirstLetter(humanChoice)}`); // no points for both
+  } else if (
+    (humanChoice === 'rock' && computerChoice === 'scissors') ||
+    (humanChoice === 'paper' && computerChoice === 'rock') ||
+    (humanChoice === 'scissors' && computerChoice === 'paper')
+  ) {
+    console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
+    humanScore += 1;
+  } else {
+    console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
+    computerScore += 1;
   }
 }
